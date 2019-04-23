@@ -126,7 +126,7 @@ func (r Repository) AddAddress(address Address) bool {
 func (r Repository) UpdateAddress(address Address) bool {
 	session, err := mgo.Dial(SERVER)
 	defer session.Close()
-
+	log.Printf("In update address ............. : %d", address.ID)
 	err = session.DB(DBNAME).C(COLLECTION).UpdateId(address.ID, address)
 	
 	if err != nil {
