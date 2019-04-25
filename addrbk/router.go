@@ -56,8 +56,22 @@ var routes = Routes {
     Route {
         "SearchAddress",
         "GET",
-        "/Searaddresses/{query}",
+        "/Searchaddresses/{query}",
         controller.SearchAddress,
+    },
+    // upload csv file
+    Route {
+       "Upload",
+        "POST",
+        "/upload",
+        controller.UploadFile,
+    },
+    // download csv file
+    Route {
+       "DownloadCSV",
+        "GET",
+        "/downloadcsv",
+        controller.DownloadCsv,
     }}
 
 // NewRouter configures a new router to the API

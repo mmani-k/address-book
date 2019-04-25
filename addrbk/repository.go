@@ -58,8 +58,6 @@ func (r Repository) GetAddressById(id int) Result {
 	c := session.DB(DBNAME).C(COLLECTION)
 	var result Address
 
-	fmt.Println("ID in GetProductById", id);
-
 	var res Result
 
 	if err := c.FindId(id).One(&result); err != nil {
@@ -153,4 +151,19 @@ func (r Repository) DeleteAddress(id int) string {
 	fmt.Println("Deleted Address ID - ", id)
 	// Write status
 	return "OK"
+}
+
+func (r Repository) FindAllAddresses() (Addresses, int){
+     session, err := mgo.Dial(SERVER)
+     defer session.Close()
+
+     var result = Addresses{}
+      err = session.DB(DBNAME).C(COLLECTION).Find(nil).All(&result)
+      if err != nil {
+      	 return result, 1
+      }
+      
+      return result, 0
+
+     
 }
