@@ -12,13 +12,11 @@ import (
 type Repository struct{}
 
 // SERVER the DB server
-const SERVER = "mongodb://myadmin:password@localhost:27017/"
+const SERVER = "mongodb://localhost:27017/"
 
-// DBNAME the name of the DB instance
+// DBNAME themyadmin:password@ name of the DB instance
 const DBNAME = "addressbook"
 
-const userName = "myadmin"
-const password = "password"
 
 // COLLECTION is the name of the collection in DB
 const COLLECTION = "addresses"
