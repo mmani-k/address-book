@@ -1,15 +1,68 @@
-# address-book
-## AddressBook restful Web Service to showcase golang microservices capabilities.
+# Address Book Spring Boot API
 
-This is a project I created and developed to practise golang restful web services. The end-points of this service facilitates the CRUD operations of an address book, which lets users store addresses of people. MongoDb is used as the data store, which is flexible as far as document structure is concerned, ie. it does not enforce a rigid structure on the data that can be stored in a collection. Also the store part is pretty flexible, just by replacing the repository class, it can access any database. 
+This project is a **Spring Boot REST API backend** for storing contact addresses in a MySQL database.  
+It is designed to be consumed by any front-end UI (web, mobile, desktop).
 
-In addition to the CRUD operations, it has a csv import export endpoint provided for bulk upload of addresses and also for downloads of the same.
+## Tech Stack
 
-MongoDB is the backend database. The instructions to set up the database will be provided later.
+- Java 17
+- Spring Boot 3
+- Spring Web
+- Spring Data JPA
+- MySQL
+- Maven
 
+## Database Table
 
-Need to write the test classes to do the integration testing of all the end-points and import export function.
+The API persists data in an `address` table with the following columns:
 
-Since I have come this far developing this, I may even use it as an actual address book project I have in mind with a web and mobile interface.
+- `name` (primary key)
+- `address_line1`
+- `city`
+- `state`
+- `country`
 
-Also planning to make it a part of the marketting platform I am planning to develop.
+## API Endpoints
+
+Base URL: `/api/addresses`
+
+- `GET /api/addresses` → list all addresses
+- `GET /api/addresses/{name}` → get one address by name
+- `POST /api/addresses` → create a new address
+- `PUT /api/addresses/{name}` → update an address
+- `DELETE /api/addresses/{name}` → delete an address
+
+### Sample POST Request
+
+```json
+{
+  "name": "John Doe",
+  "addressLine1": "123 Main Street",
+  "city": "Austin",
+  "state": "Texas",
+  "country": "USA"
+}
+```
+
+## MySQL Configuration
+
+Application properties use environment variable overrides:
+
+- `DB_URL` (default: `jdbc:mysql://localhost:3306/addressbook`)
+- `DB_USERNAME` (default: `root`)
+- `DB_PASSWORD` (default: `root`)
+- `SERVER_PORT` (default: `8080`)
+
+## Run the Application
+
+```bash
+mvn spring-boot:run
+```
+
+## Run Tests
+
+```bash
+mvn test
+```
+
+Tests use an in-memory H2 database.
